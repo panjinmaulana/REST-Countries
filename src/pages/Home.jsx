@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import Figure from "../components/Figure";
 
 export default function Home() {
@@ -6,7 +7,14 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [searchCountry, setSearchCountry] = useState([]);
 
+  const history = useHistory();
+  const location = useLocation();
+
   useEffect(() => {
+    if (!location.state || !localStorage.getItem(location.state.email)) {
+      history.push("/login");
+    }
+
     fetch("https://restcountries.com/v3.1/all")
       .then((res) => res.json())
       .then((data) => {
