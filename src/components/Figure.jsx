@@ -17,6 +17,7 @@ export default function Figure({ country }) {
             width: "200px",
             height: "100px",
             objectFit: "cover",
+            boxShadow: "0px 10px 15px -3px rgba(0,0,0,0.05)",
           }}
         />
         <figcaption class="figure-caption">

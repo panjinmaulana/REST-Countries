@@ -25,13 +25,7 @@ export default function App() {
             >
               <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div class="navbar-nav">
-                <Link to="/" class="nav-link active">
-                  Home
-                </Link>
-              </div>
-            </div>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup"></div>
           </div>
         </nav>
 

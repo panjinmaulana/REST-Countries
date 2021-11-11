@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useHistory, Link } from "react-router-dom";
 
-export default function Login() {
+import Register from "./Register";
+
+export default function Login({ setIsLogin }) {
   const [input, setInput] = useState({ email: "", password: "" });
-
-  const history = useHistory();
+  const [showRegister, setShowRegister] = useState(false);
 
   function handleOnChange(e) {
     const { name, value } = e.target;
@@ -15,11 +15,25 @@ export default function Login() {
   function handleOnClick(e) {
     e.preventDefault(e);
 
-    if (localStorage.getItem(input.email) === input.password) {
-      history.push({ pathname: "/", state: { email: input.email } });
+    if (
+      localStorage.getItem("email") === input.email &&
+      localStorage.getItem("password") === input.password
+    ) {
+      localStorage.setItem("isLogin", true);
+      setIsLogin(true);
     } else {
       console.log("Not authorized");
     }
+  }
+
+  function handleToRegister(e) {
+    e.preventDefault();
+
+    setShowRegister(true);
+  }
+
+  if (showRegister) {
+    return <Register setShowRegister={setShowRegister} />;
   }
 
   return (
@@ -70,13 +84,13 @@ export default function Login() {
               >
                 Login
               </button>
-              <Link
-                to="/register"
+              <p
                 className="text-decoration-underline align-self-center"
-                style={{ color: "#7f8c8d" }}
+                style={{ color: "#7f8c8d", cursor: "pointer" }}
+                onClick={(e) => handleToRegister(e)}
               >
                 Don't have an account yet
-              </Link>
+              </p>
             </div>
           </form>
         </div>

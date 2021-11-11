@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 
-export default function Register() {
+export default function Register({ setShowRegister }) {
   const [input, setInput] = useState({ email: "", password: "" });
-
-  const history = useHistory();
 
   function handleOnChange(e) {
     const { name, value } = e.target;
@@ -16,12 +13,18 @@ export default function Register() {
     e.preventDefault();
 
     if (input.email && input.password) {
-      localStorage.setItem(input.email, input.password);
+      localStorage.setItem("email", input.email);
+      localStorage.setItem("password", input.password);
 
-      history.push("/login");
+      setShowRegister(false);
     } else {
       console.log("Field email & password is required.");
     }
+  }
+
+  function handleCancel(e) {
+    e.preventDefault();
+    setShowRegister(false);
   }
 
   return (
@@ -64,13 +67,22 @@ export default function Register() {
                 onChange={(e) => handleOnChange(e)}
               />
             </div>
-            <button
-              type="button"
-              class="btn btn-success"
-              onClick={(e) => handleOnClick(e)}
-            >
-              Register
-            </button>
+            <div className="d-flex justify-content-end">
+              <button
+                type="button"
+                class="btn btn-danger me-2"
+                onClick={(e) => handleCancel(e)}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                class="btn btn-success"
+                onClick={(e) => handleOnClick(e)}
+              >
+                Register
+              </button>
+            </div>
           </form>
         </div>
       </div>
