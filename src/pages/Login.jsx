@@ -4,6 +4,7 @@ import Register from "./Register";
 
 export default function Login({ setIsLogin }) {
   const [input, setInput] = useState({ email: "", password: "" });
+  const [showMessage, setShowMessage] = useState("");
   const [showRegister, setShowRegister] = useState(false);
 
   function handleOnChange(e) {
@@ -22,7 +23,11 @@ export default function Login({ setIsLogin }) {
       localStorage.setItem("isLogin", true);
       setIsLogin(true);
     } else {
-      console.log("Not authorized");
+      setInput({ email: "", password: "" });
+      setShowMessage("Not authorized");
+      setTimeout(() => {
+        setShowMessage("");
+      }, 3000);
     }
   }
 
@@ -44,16 +49,21 @@ export default function Login({ setIsLogin }) {
         </div>
       </div>
       <div className="row">
-        <div className="col">
-          <form
-            style={{
-              width: "30%",
-              margin: "0 auto",
-              padding: "30px",
-              borderRadius: "13px",
-              boxShadow: "0px 10px 15px -3px rgba(0,0,0,0.1)",
-            }}
-          >
+        <div
+          className="col-10 col-md-6 col-lg-4"
+          style={{
+            margin: "0 auto",
+            padding: "30px",
+            borderRadius: "13px",
+            boxShadow: "0px 10px 15px -3px rgba(0,0,0,0.1)",
+          }}
+        >
+          <form>
+            {showMessage ? (
+              <div class="alert alert-danger" role="alert">
+                {showMessage}
+              </div>
+            ) : null}
             <div class="mb-3">
               <label for="email" class="form-label">
                 Email address
@@ -62,6 +72,7 @@ export default function Login({ setIsLogin }) {
                 type="email"
                 class="form-control"
                 name="email"
+                value={input.email}
                 onChange={(e) => handleOnChange(e)}
               />
             </div>
@@ -73,6 +84,7 @@ export default function Login({ setIsLogin }) {
                 type="password"
                 class="form-control"
                 name="password"
+                value={input.password}
                 onChange={(e) => handleOnChange(e)}
               />
             </div>

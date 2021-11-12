@@ -35,16 +35,16 @@ export default function Register({ setShowRegister }) {
         </div>
       </div>
       <div className="row">
-        <div className="col">
-          <form
-            style={{
-              width: "30%",
-              margin: "0 auto",
-              padding: "30px",
-              borderRadius: "13px",
-              boxShadow: "0px 10px 15px -3px rgba(0,0,0,0.1)",
-            }}
-          >
+        <div
+          className="col-10 col-md-6 col-lg-4"
+          style={{
+            margin: "0 auto",
+            padding: "30px",
+            borderRadius: "13px",
+            boxShadow: "0px 10px 15px -3px rgba(0,0,0,0.1)",
+          }}
+        >
+          <form>
             <div class="mb-3">
               <label for="email" class="form-label">
                 Email address
